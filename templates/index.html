@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meu Algoritmo</title>
+</head>
+<body>
+  <h1>Interface do Algoritmo</h1>
+
+  <input id="x" placeholder="Valor X">
+  <input id="y" placeholder="Valor Y">
+
+  <button onclick="rodar()">Executar</button>
+
+  <h3 id="resultado"></h3>
+
+  <script>
+    async function rodar() {
+      const x = document.getElementById("x").value;
+      const y = document.getElementById("y").value;
+
+      const res = await fetch("/executar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ x, y })
+      });
+
+      const data = await res.json();
+      document.getElementById("resultado").innerText =
+        "Resultado: " + data.resultado;
+    }
+  </script>
+</body>
+</html>
